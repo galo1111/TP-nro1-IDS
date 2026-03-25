@@ -3,13 +3,6 @@
 
 export FILENAME="salida"
 
-if [[ "$1" == "-d" ]]; then
-echo "Parametro -d detectado"
-pkill -f "consolidar.sh"
-rm -r ~/EPNro1
-exit 0
-fi
-
 while true;
 do
 echo "-------Menú principal-------"
@@ -55,8 +48,15 @@ if [ -f ~/EPNro1/salida/$FILENAME.txt ]; then
 else
 echo "No existe el archivo en la carpeta salida"
 fi;;
-    6) echo "Cerrando menu..."
-exit 0;;
+    
+    6) 
+    echo "Cerrando menu..."
+    if [[ "$1" == "-d" ]]; then
+        echo "Parametro -d detectado"
+        pkill -f "consolidar.sh"
+        rm -r ~/EPNro1
+    fi
+    exit 0;;
 
     *) echo "Opcion invalida. Intente de nuevo.";;
 esac
